@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Daily snapshots</h1>
+
+<div id="daily_snapshots">
+  <% @daily_snapshots.each do |daily_snapshot| %>
+    <%= render daily_snapshot %>
+    <p>
+      <%= link_to "Show this daily snapshot", daily_snapshot %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New daily snapshot", new_daily_snapshot_path %>

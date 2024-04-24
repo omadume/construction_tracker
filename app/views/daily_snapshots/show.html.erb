@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @daily_snapshot %>
+
+<div>
+  <%= link_to "Edit this daily snapshot", edit_daily_snapshot_path(@daily_snapshot) %> |
+  <%= link_to "Back to daily snapshots", daily_snapshots_path %>
+
+  <%= button_to "Destroy this daily snapshot", @daily_snapshot, method: :delete %>
+</div>

@@ -1,0 +1,32 @@
+<%= form_with(model: daily_snapshot) do |form| %>
+  <% if daily_snapshot.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(daily_snapshot.errors.count, "error") %> prohibited this daily_snapshot from being saved:</h2>
+
+      <ul>
+        <% daily_snapshot.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :building_id, style: "display: block" %>
+    <%= form.text_field :building_id %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :total_expenditure, style: "display: block" %>
+    <%= form.text_field :total_expenditure %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
