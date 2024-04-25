@@ -44,8 +44,11 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-# Scheduling tool for rake tasks
+# For handling background jobs
 gem 'delayed_job_active_record'
+
+# For scheduling recurring jobs directly within Rails app without need for external scheduler like Sidekiq
+gem 'clockwork'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
