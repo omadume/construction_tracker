@@ -13,12 +13,6 @@ class DailySnapshotsController < ApplicationController
 
   # POST /daily_snapshots or /daily_snapshots.json
   def create
-    # current_time = Time.zone.now
-    # next_midnight = current_time.end_of_day + 1.second
-
-    # DailySnapshotGenerationJob.set(wait_until: next_midnight).perform_later(@building.id)
-
-    # render json: { message: 'Snapshot will be generated at midnight.' }
     @daily_snapshot = @building.daily_snapshots.build(daily_snapshot_params)
     if @daily_snapshot.save
       render json: @daily_snapshot, status: :created, location: @daily_snapshot
