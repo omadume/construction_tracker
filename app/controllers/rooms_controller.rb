@@ -47,7 +47,7 @@ class RoomsController < ApplicationController
 
   private
     def set_room
-      @room = Room.find(params[:id])
+      @room = @building.rooms.find(params[:id])
       render json: { error: "Room not found" }, status: :not_found unless @room
     end
 
