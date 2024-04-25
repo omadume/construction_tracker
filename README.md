@@ -7,3 +7,5 @@
 * DB: SQLite3 (default)
 
 * Testing: Rspec
+
+Note: This is a simple CRUD API with no views configured
