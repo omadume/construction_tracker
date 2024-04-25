@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_155216) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_162533) do
   create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.decimal "budget"
@@ -26,6 +26,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_25_155216) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "room_data"
+    t.string "building_name"
     t.index ["building_id"], name: "index_daily_snapshots_on_building_id"
   end
 
