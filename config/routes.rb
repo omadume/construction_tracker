@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
-  resources :daily_snapshots
-  resources :elements
-  resources :rooms
-  resources :buildings
+  # Removing 'new' and 'edit' routes because this will be simple CRUD with no UI
+  resources :daily_snapshots, except: [:new, :edit]
+  resources :elements, except: [:new, :edit]
+  resources :rooms, except: [:new, :edit]
+  resources :buildings, except: [:new, :edit]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

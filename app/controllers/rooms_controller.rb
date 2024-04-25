@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[ show edit update destroy ]
+  before_action :set_building
+  before_action :set_room, only: %i[ show update destroy ]
 
   # GET /rooms or /rooms.json
   def index
@@ -10,60 +11,51 @@ class RoomsController < ApplicationController
   def show
   end
 
-  # GET /rooms/new
-  def new
-    @room = Room.new
-  end
-
-  # GET /rooms/1/edit
-  def edit
-  end
-
   # POST /rooms or /rooms.json
   def create
-    @room = Room.new(room_params)
-
-    respond_to do |format|
-      if @room.save
-        format.html { redirect_to room_url(@room), notice: "Room was successfully created." }
-        format.json { render :show, status: :created, location: @room }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+    @room = @building.rooms.build(room_params)
+    if @room.save
+      render json: @room, status: :created, location: @room
+    else
+      render json: @room.errors, status: :unprocessable_entity
     end
+  # Explicitly catching parameter errors for more robust error handling
+  rescue ActionController::ParameterMissing => e
+    render json: { error: e.message }, status: :bad_request
   end
 
   # PATCH/PUT /rooms/1 or /rooms/1.json
   def update
-    respond_to do |format|
-      if @room.update(room_params)
-        format.html { redirect_to room_url(@room), notice: "Room was successfully updated." }
-        format.json { render :show, status: :ok, location: @room }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+    if @room.update(room_params)
+      render json: @room
+    else
+      render json: @room.errors, status: :unprocessable_entity
     end
+  # Explicitly catching parameter errors for more robust error handling
+  rescue ActionController::ParameterMissing => e
+    render json: { error: e.message }, status: :bad_request
   end
 
   # DELETE /rooms/1 or /rooms/1.json
   def destroy
-    @room.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to rooms_url, notice: "Room was successfully destroyed." }
-      format.json { head :no_content }
+    if @room.destroy
+      head :no_content
+    else
+      render json: { error: "Failed to destroy room" }, status: :unprocessable_entity
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_room
       @room = Room.find(params[:id])
+      render json: { error: "Room not found" }, status: :not_found unless @room
     end
 
-    # Only allow a list of trusted parameters through.
+    def set_building
+      @building = Building.find(params[:building_id])
+      render json: { error: "Building not found" }, status: :not_found unless @building
+    end
+
     def room_params
       params.require(:room).permit(:building_id, :name, :cost)
     end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_24_145157) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_120935) do
   create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.decimal "budget"
@@ -25,11 +25,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_145157) do
     t.decimal "total_expenditure"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "room_data"
     t.index ["building_id"], name: "index_daily_snapshots_on_building_id"
   end
 
   create_table "elements", force: :cascade do |t|
-    t.integer "room_id", null: false
+    t.integer "room_id"
     t.string "name"
     t.decimal "cost"
     t.datetime "created_at", null: false
@@ -43,6 +44,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_24_145157) do
     t.decimal "cost"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "not started"
     t.index ["building_id"], name: "index_rooms_on_building_id"
   end
 
