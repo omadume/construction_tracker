@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_120935) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_25_155216) do
   create_table "buildings", force: :cascade do |t|
     t.string "name"
     t.decimal "budget"
-    t.decimal "total_expenditure"
+    t.decimal "total_expenditure", default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
