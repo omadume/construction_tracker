@@ -48,6 +48,7 @@ class DailySnapshotsController < ApplicationController
   private
     def set_daily_snapshot
       @daily_snapshot = DailySnapshot.find(params[:id])
+      render json: { error: "Daily snapshot not found" }, status: :not_found unless @bdaily_snapshot
     end
 
     def set_building

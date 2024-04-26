@@ -47,6 +47,7 @@ class BuildingsController < ApplicationController
   private
     def set_building
       @building = Building.find(params[:id])
+      render json: { error: "Building not found" }, status: :not_found unless @building
     end
 
     def building_params

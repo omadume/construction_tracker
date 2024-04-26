@@ -1,5 +1,5 @@
 class ElementsController < ApplicationController
-  before_action :set_element, only: %i[ show update destroy assign_to_room ]
+  before_action :set_element, only: %i[ show update destroy ]
   before_action :set_room, only: %i[ update ]
 
   # GET /elements or /elements.json
